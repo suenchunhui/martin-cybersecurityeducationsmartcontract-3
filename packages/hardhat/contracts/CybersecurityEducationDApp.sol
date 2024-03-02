@@ -12,14 +12,13 @@ contract CybersecurityEducationDApp is Ownable {
     
     event ContractPicked(address indexed user, bool isLegit, uint256 points);
     
-    function generateLegitContract(string memory name, string memory symbol) external onlyOwner {
-        address newContractAddress = address(new LegitContract(name, symbol, msg.sender));
-        legitContracts[newContractAddress] = true;
-    }
-    
-    function generateMaliciousContract(string memory name, string memory symbol) external onlyOwner {
-        address newContractAddress = address(new MaliciousContract(name, symbol, msg.sender));
-        maliciousContracts[newContractAddress] = true;
+    constructor() {
+        // Automatically generate legit and malicious contracts upon deployment
+        address legitContractAddress = address(new LegitContract("Legit NFT", "LNF", address(this)));
+        legitContracts[legitContractAddress] = true;
+        
+        address maliciousContractAddress = address(new MaliciousContract("Malicious NFT", "MNF", address(this)));
+        maliciousContracts[maliciousContractAddress] = true;
     }
     
     function pickContract(address contractAddress) external {
