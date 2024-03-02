@@ -35,15 +35,15 @@ contract CybersecurityEducationDApp is Ownable {
 }
 
 contract LegitContract is ERC721, Ownable {
-    constructor(string memory name, string memory symbol, address initialOwner)
+    constructor(string memory name, string memory symbol)
         ERC721(name, symbol) {
-        transferOwnership(initialOwner);
+        transferOwnership(msg.sender);
     }
 }
 
 contract MaliciousContract is ERC721, Ownable {
-    constructor(string memory name, string memory symbol, address initialOwner)
+    constructor(string memory name, string memory symbol)
         ERC721(name, symbol) {
-        transferOwnership(initialOwner);
+        transferOwnership(msg.sender);
     }
 }
